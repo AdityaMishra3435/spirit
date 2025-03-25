@@ -9,7 +9,7 @@
 SPIRIT is a novel machine learning system for **solar irradiance forecasting**, leveraging **foundation models** and **zero-shot transfer learning** to enable accurate predictions even for **new locations without historical data**. This system significantly outperforms traditional models in both **nowcasting** (real-time forecasting) and **short-term forecasting** (1 to 4-hour predictions). SPIRIT implements a hybrid architecture with a PyTorch-based transformer model for forecasting and an XGBoost-based model for nowcasting, combining the strengths of both frameworks.
 
 
-🚀 **Key Features:**
+### Key Features:
 - **Foundation model-powered**: Uses pre-trained vision transformers (ViT) for feature extraction
 - **Physics-inspired features**: Incorporates clear sky models and solar geometry data
 - **Hyperparameter optimization**: Uses Optuna for model tuning
@@ -18,72 +18,62 @@ SPIRIT is a novel machine learning system for **solar irradiance forecasting**, 
 ## 📁 Repository Structure
 ```plaintext
 📂 spirit
- ├── 📁 models                    # Model implementations
- │   ├── 📜 nowcast.py            # XGBoost-based nowcasting model 
- │   └── 📜 forecast.py           # Transformer-based forecasting model 
- ├── 📁 data                      # Data processing
- │   ├── 📜 config.py             # Configuration settings
- │   ├── 📜 main.py               # Main data processing script
- │   ├── 📜 README.md             # Data module documentation
- │   ├── 📁 modules               # Data processing modules
- │   │   ├── 📜 data_creation.py  # Dataset creation
- │   │   ├── 📜 download.py       # Data downloading utilities
- │   │   ├── 📜 embedding_generation.py # Feature embedding generation
- │   │   ├── 📜 extraction.py     # Data extraction tools
- │   │   └── 📜 preprocessing.py  # Data preprocessing
- │   └── 📁 utils                 # Utility functions for data
- │       ├── 📜 data_utils.py     # Data manipulation utilities
- │       ├── 📜 file_utils.py     # File handling utilities
- │       └── 📜 __init__.py       # Package initialization
- └── 📜 README.md                 # Project documentation
+ ├── 📁 models         # Model implementations
+ │   ├── nowcast.py            
+ │   └── forecast.py           
+ ├── 📁 data           # Data processing
+ │   ├── config.py             
+ │   ├── main.py               
+ │   ├── README.md             
+ │   ├── modules                    
+ │   │   ├── data_creation.py  
+ │   │   ├── download.py       
+ │   │   ├── embedding_generation.py 
+ │   │   ├── extraction.py     
+ │   │   └── preprocessing.py  
+ │   └── utils                     
+ │       ├── data_utils.py     
+ │       ├── file_utils.py     
+ │       └── __init__.py       
+ └── 📜 README.md                 
 ```
 
 ## 🔧 Implementation
 
 ### Nowcasting Model 
 The implementation of the nowcasting system uses XGBoost to predict current solar irradiance from sky images:
-- **Input**: Single sky image processed through a Vision Transformer
-- **Features**: Image embeddings combined with auxiliary features
+- **Input**: Single sky image processed through a Vision Transformer and auxiliary features
+- **Architecture**: Gradient-boosted decision trees (XGBoost) with tree pruning, feature subsampling, and optimized hyperparameters for non-linear regression 
 - **Output**: Global Horizontal Irradiance prediction
 
 ### Forecasting Model
 The implementation of the forecasting system uses a transformer-based architecture for time series predictions:
 - **Input**: Sequence of sky images and the corresponding auxiliary data
-- **Architecture**: 
-  - Transformer encoder with residual MLP blocks
-  - Multi-head attention mechanism
-  - Time-based position embeddings
+- **Architecture**: Transformer encoder with residual MLP blocks, multi-head attention mechanism, and temporal position embeddings
 - **Output**: GHI predictions for future time steps (1-4 hours)
 
 ## ⚡ Installation
 Ensure you have Python 3.8+ installed. Then, clone the repository and install dependencies:
 ```bash
-git clone https://github.com/AdityaMishraOG/spirit.git
+git clone https://github.com/AdityaMishra3435/spirit.git
 cd spirit
 pip install -r requirements.txt
 ```
 
 ## 🚀 Usage
 
-1️⃣ **Nowcasting (Real-time)**
+**Nowcasting**
 ```sh
 cd models  
 python nowcast.py  
 ```
-
-2️⃣ **Forecasting (Short-term)**
+**Forecasting**
 ```sh
 cd models  
 python forecast.py  
 ```
-
-📊 **Performance Metrics**
-SPIRIT is evaluated using the following metrics:
-- **MAE**: Mean Absolute Error  
-- **RMSE**: Root Mean Squared Error  
-- **nMAP**: Normalized Mean Absolute Percentage Error  
-- **R²**: Coefficient of Determination  
-
+**Performance Metrics**  
+SPIRIT is evaluated using the metrics: Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), Normalized Mean Absolute Percentage Error (nMAP) and Coefficient of Determination (R2 Score) 
 
 ## 📜 Citation
 If you use SPIRIT in your research, please cite the paper:
